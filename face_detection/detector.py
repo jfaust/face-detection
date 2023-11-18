@@ -19,14 +19,11 @@ def relative(path):
 class RetinaFace:
     def __init__(
         self,
-        gpu_id=-1,
+        device=None,
         model_path=relative("weights/mobilenet0.25_Final.pth"),
         network="mobilenet",
     ):
-        self.gpu_id = gpu_id
-        self.device = (
-            torch.device("cpu") if gpu_id == -1 else torch.device("cuda", gpu_id)
-        )
+        self.device = device
         self.model = load_net(model_path, self.device, network)
 
     def detect(self, images):
